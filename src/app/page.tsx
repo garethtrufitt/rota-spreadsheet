@@ -1,6 +1,6 @@
-import DocsData from "./getSheetData";
+import DocsData from "../dataUpdates/getSheetData";
 import Table from "../components/displayTable/displayTable";
-import updateRows from "./updateRows";
+import updateRows from "../dataUpdates/updateRows";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import Link from "next/link";

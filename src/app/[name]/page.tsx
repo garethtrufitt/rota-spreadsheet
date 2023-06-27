@@ -1,5 +1,5 @@
 import Image from "next/image";
-import DocsData from "../getSheetData";
+import DocsData from "../../dataUpdates/getSheetData";
 import Table from "../../components/displayTable/displayTable";
 import { useRouter } from "next/router";
 import Link from "next/link";

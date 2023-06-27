@@ -1,4 +1,4 @@
-import { DocsDataType } from "../../app/getSheetData";
+import { DocsDataType } from "../../dataUpdates/getSheetData";
 import EditButton from "../editButton";
 
 export default function Table(props: { data: DocsDataType; canEdit: boolean }) {

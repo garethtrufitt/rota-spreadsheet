@@ -247,7 +247,7 @@
       "id": "(app-client)/./node_modules/next/dist/client/link.js",
       "name": "*",
       "chunks": [
-        "app/[name]/page:static/chunks/app/[name]/page.js"
+        "app/page:static/chunks/app/page.js"
       ],
       "async": false
     },
@@ -255,7 +255,7 @@
       "id": "(app-client)/./node_modules/next/dist/client/link.js",
       "name": "*",
       "chunks": [
-        "app/[name]/page:static/chunks/app/[name]/page.js"
+        "app/page:static/chunks/app/page.js"
       ],
       "async": false
     },
@@ -263,7 +263,7 @@
       "id": "(app-client)/./node_modules/next/dist/shared/lib/lazy-dynamic/dynamic-no-ssr.js",
       "name": "*",
       "chunks": [
-        "app/login/page:static/chunks/app/login/page.js"
+        "app/page:static/chunks/app/page.js"
       ],
       "async": false
     },
@@ -271,7 +271,7 @@
       "id": "(app-client)/./node_modules/next/dist/shared/lib/lazy-dynamic/dynamic-no-ssr.js",
       "name": "*",
       "chunks": [
-        "app/login/page:static/chunks/app/login/page.js"
+        "app/page:static/chunks/app/page.js"
       ],
       "async": false
     },
@@ -279,7 +279,7 @@
       "id": "(app-client)/./src/components/editButton.tsx",
       "name": "*",
       "chunks": [
-        "app/[name]/page:static/chunks/app/[name]/page.js"
+        "app/page:static/chunks/app/page.js"
       ],
       "async": false
     }
@@ -294,19 +294,11 @@
         "static/css/app/layout.css"
       ]
     },
-    "/Users/gareth.trufitt/code/rota-spreadsheet/rota-spreadsheet/src/app/page": {
-      "modules": [],
-      "files": []
-    },
-    "/Users/gareth.trufitt/code/rota-spreadsheet/rota-spreadsheet/src/app/[name]/page": {
-      "modules": [],
-      "files": []
-    },
     "/Users/gareth.trufitt/code/rota-spreadsheet/rota-spreadsheet/src/app/loading": {
       "modules": [],
       "files": []
     },
-    "/Users/gareth.trufitt/code/rota-spreadsheet/rota-spreadsheet/src/app/login/page": {
+    "/Users/gareth.trufitt/code/rota-spreadsheet/rota-spreadsheet/src/app/page": {
       "modules": [],
       "files": []
     }

@@ -1,7 +1,7 @@
 export default function Loading() {
   // You can add any UI inside Loading, including a Skeleton.
   return (
-    <div className="text-center">
+    <div className="text-center mt-6">
       <div role="status">
         <svg
           aria-hidden="true"

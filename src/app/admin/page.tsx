@@ -2,12 +2,17 @@ import { redirect, useSearchParams } from "next/navigation";
 import nodemailer from "nodemailer";
 
 import Button from "@/components/Button";
+import Carers from "@/carers";
 
 export default async function Admin(props: {
   searchParams: { login: string; rotaEmailSent: string };
 }) {
-  const sendMail = async () => {
+  const sendMail = async (data: FormData) => {
     "use server";
+
+    const carers = Carers();
+    const carerNames = data.getAll("carers") as (keyof typeof carers)[];
+    const carerObjs = carerNames.map((name) => carers[name]);
 
     const transport = nodemailer.createTransport({
       host: "smtp.forwardemail.net",
@@ -18,13 +23,17 @@ export default async function Admin(props: {
         pass: process.env.SMTP_PASSWORD,
       },
     });
-    await transport.sendMail({
-      from: '"Rota Trufitt" <rota@trufitt.com>', // sender address
-      to: "gtrufitt@gmail.com", // list of receivers
-      subject: "Your Upcoming Rota", // Subject line
-      text: "Hello world?", // plain text body
-      html: "<h1>Your Rota</h1><p><b>Hello world?</b> Test</p>", // html body
+
+    carerObjs.forEach(async (carer) => {
+      await transport.sendMail({
+        from: '"Rota Trufitt" <rota@trufitt.com>', // sender address
+        to: carer.email, // list of receivers
+        subject: `Your Upcoming Rota, ${carer.name}`, // Subject line
+        text: "Hello, your rota is available", // plain text body
+        html: `<h1>Hi ${carer.name}, your rota is available.</h1><p><a href="https://rota.dearevelina.com/${carer.username}">See your rota</a></p><p><a href="https://rota.dearevelina.com/">See available shifts</a></p>`, // html body
+      });
     });
+
     redirect("/admin?login=admin1987&rotaEmailSent=true");
   };
 
@@ -47,6 +56,12 @@ export default async function Admin(props: {
           Email shifts
         </h2>
         <form action="/api/emailShifts">
+          {Object.entries(Carers()).map((carer) => (
+            <label key={carer[1].username} className="flex items-center gap-2">
+              <input type="checkbox" name="carers" value={carer[1].username} />
+              {carer[1].name}
+            </label>
+          ))}
           <Button formAction={sendMail} />
         </form>
       </main>

@@ -7,7 +7,7 @@ export default function Table(props: { data: DocsDataType; canEdit: boolean }) {
   return (
     <table className="my-6">
       {props.data.map((row) => (
-        <tr key={row.rowNum} data-row-num={row.rowNum}>
+        <tr className="text-black px-2 border-b-2" key={row.rowNum} data-row-num={row.rowNum}>
           <td className="pr-4">
             {moment(row.date, "D/MM/yyyy").format("ddd Do MMM")}
           </td>

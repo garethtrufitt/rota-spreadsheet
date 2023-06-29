@@ -64,7 +64,7 @@ export default async function Name({ params }: { params: { name: string } }) {
       </h2>
       <Table data={shiftsAfterToday} canEdit={false} />
       <h2 className="mb-4 mt-4 text-2xl font-bold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
-        Past Shifts since last pay day
+        Shifts since last pay day
       </h2>
       <Table data={shiftsBeforeTodaySinceLastPayDay} canEdit={false} />
       <h2 className="mb-4 mt-4 text-2xl font-bold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">

@@ -5,12 +5,17 @@ import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import Link from "next/link";
 import { revalidatePath } from "next/cache";
+import moment from "moment";
 
 const names = ["Gareth", "Hayley", "Alex", "Lauren"];
 
 const getAvailableShifts = async () => {
   const data = await DocsData();
-  return data.filter((row) => row.confirmed !== "Y");
+
+  return data.filter(
+    (row) =>
+      row.confirmed !== "Y" && moment(row.date, "D/MM/yyyy").isAfter(moment())
+  );
 };
 
 export default async function Home() {

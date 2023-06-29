@@ -6,6 +6,7 @@ import Link from "next/link";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import moment from "moment";
+import formatMoneyAsNumbers from "../utils/formatMoneyAsNumber";
 
 export default async function Name({ params }: { params: { name: string } }) {
   const loggedInCookie: { name: string; username: string } = JSON.parse(
@@ -22,16 +23,26 @@ export default async function Name({ params }: { params: { name: string } }) {
     (row) => row.name?.toLowerCase() === params.name.toLowerCase()
   );
 
-  const shiftsBeforeToday = carerShifts.filter((row) =>
-    moment(row.date, "D/MM/yyyy").isBefore(moment())
-  );
+  const shiftsBeforeTodaySinceLastPayDay = carerShifts.filter((row) => {
+    const monthPrev = moment().subtract(1, "month");
+    const paydayStart = monthPrev.set("date", 28);
+    const paydayEnd = moment().set("date", 28);
+
+    return moment(row.date, "D/MM/yyyy").isBetween(paydayStart, paydayEnd);
+  });
 
   const shiftsAfterToday = carerShifts.filter((row) =>
     moment(row.date, "D/MM/yyyy").isAfter(moment())
   );
 
-  const totalHours = shiftsBeforeToday.reduce(
+  const totalHours = shiftsBeforeTodaySinceLastPayDay.reduce(
     (prev, curr) => prev + curr.hours,
+    0
+  );
+
+  const totalPay = shiftsBeforeTodaySinceLastPayDay.reduce(
+    (prev, curr) =>
+      prev + curr.hours * formatMoneyAsNumbers(curr.enhancedRate || "£15.00"),
     0
   );
 
@@ -53,10 +64,14 @@ export default async function Name({ params }: { params: { name: string } }) {
       </h2>
       <Table data={shiftsAfterToday} canEdit={false} />
       <h2 className="mb-4 mt-4 text-2xl font-bold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
-        Past Shifts
+        Past Shifts since last pay day
       </h2>
-      <Table data={shiftsBeforeToday} canEdit={false} />
+      <Table data={shiftsBeforeTodaySinceLastPayDay} canEdit={false} />
+      <h2 className="mb-4 mt-4 text-2xl font-bold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+        Invoice Details
+      </h2>
       <p className={"mt-4 "}>Total Hours: {totalHours}</p>
+      <p className={"mt-4 "}>Total Pay: £{totalPay.toFixed(2)}</p>
     </main>
   );
 }

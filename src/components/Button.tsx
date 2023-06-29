@@ -3,7 +3,9 @@
 import { Spinner } from "flowbite-react";
 import { experimental_useFormStatus as useFormStatus } from "react-dom";
 
-export default function Button(props: { formAction: () => void }) {
+export default function Button(props: {
+  formAction: (data: FormData) => void;
+}) {
   const { pending } = useFormStatus();
   const { formAction } = props;
 

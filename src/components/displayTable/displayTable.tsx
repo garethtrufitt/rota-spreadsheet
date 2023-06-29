@@ -5,7 +5,7 @@ import { table } from "console";
 
 export default function Table(props: { data: DocsDataType; canEdit: boolean }) {
   return (
-    <table className="my-6">
+    <table className="my-6 w-full">
       {props.data.map((row) => (
         <tr className="text-black px-2 border-b-2" key={row.rowNum} data-row-num={row.rowNum}>
           <td className="pr-2">
